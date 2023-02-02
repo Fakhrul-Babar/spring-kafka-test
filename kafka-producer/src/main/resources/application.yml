@@ -1,0 +1,13 @@
+spring:
+  kafka:
+    bootstrap-servers: ${test.kafka.bootstrap-servers}
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      transaction-id-prefix: bgw-tx-
+#      properties:
+#        enable.idempotence: true
+#        transactional.id: tran-id-${HOSTNAME}
+    consumer:
+      group-id: kafka-producer
+      enable-auto-commit: false
+      isolation-level: read_committed

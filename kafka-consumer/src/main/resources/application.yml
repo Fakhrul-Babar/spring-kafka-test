@@ -1,0 +1,23 @@
+spring:
+  kafka:
+    bootstrap-servers: ${test.kafka.bootstrap-servers}
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+    consumer:
+      group-id: consumer-test
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      value-deserializer: com.example.kafkaconsumer.configuration.CustomJsonDeserializer
+      enable-auto-commit: false
+      isolation-level: read_committed
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.example.domain
+          deserializer:
+            value:
+              delegate:
+                class: org.springframework.kafka.support.serializer.JsonDeserializer
